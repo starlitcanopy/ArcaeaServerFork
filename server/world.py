@@ -16,11 +16,19 @@ bp = Blueprint('world', __name__, url_prefix='/world')
 def world_all(user_id):
     with Connect() as c:
         user = UserOnline(c, user_id)
+        user.select_user()
         user.select_user_about_current_map()
+
+        maps = []
+        for x in MapParser.get_world_all(c, user):
+            if x.map_id == 'lephon_nell' and user.lephon_nell_state == 4:
+                continue
+            maps.append(x.to_dict(has_map_info=True, has_rewards=True))
+
         return success_return({
             "current_map": user.current_map.map_id,
             "user_id": user_id,
-            "maps": [x.to_dict(has_map_info=True, has_rewards=True) for x in MapParser.get_world_all(c, user)]
+            "maps": maps
         })
 
 
