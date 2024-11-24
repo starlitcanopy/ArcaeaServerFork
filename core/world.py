@@ -340,11 +340,12 @@ class UserMap(Map):
             self.is_locked = True
             self.initialize()
 
-        self.lephon_final = self.user.lephon_nell_state == 3
+        user_lephon_nell_state = self.user.lephon_nell_state
+        self.lephon_final = user_lephon_nell_state == 3
         self.lephon_active = self.lephon_final
         
-        if self.user.lephon_nell_state <= 3 and self.map_id == 'lephon_nell':
-            self.overwrite_steps = [Step().from_dict(s) for s in MapParser.get_lephon_nell_phase(self.user.lephon_nell_state)]
+        if user_lephon_nell_state <= 3 and self.map_id == 'lephon_nell':
+            self.overwrite_steps = [Step().from_dict(s) for s in MapParser.get_lephon_nell_phase(user_lephon_nell_state)]
         
         self.select_map_info() # Update with overwrite_steps
         x: 'Step' = self.steps[self.curr_position]
@@ -390,29 +391,30 @@ class UserMap(Map):
         if self.is_beyond and step_value < 0:
             raise InputError('`Step_value` must be non-negative.')
 
+        user_lephon_nell_state = self.user.lephon_nell_state
         if self.user.current_map.map_id == "lephon_nell":
             # If on phase 1 and player is on wall_impossible, switch phase
-            if self.user.lephon_nell_state == 0:
+            if user_lephon_nell_state == 0:
                 x: 'Step' = self.user.current_map.steps_for_climbing[-1]
                 if x.step_type and "wall_impossible" in x.step_type:
                     self.user.current_map.steps_modified = True
-                    self.user.lephon_nell_state = 1
+                    user_lephon_nell_state = 1
             
             # If alrrady on phase and not at final phase, we switch
-            if self.user.lephon_nell_state > 0 and self.user.lephon_nell_state < 3:
-                self.user.lephon_nell_state += 1
+            if user_lephon_nell_state > 0 and user_lephon_nell_state < 3:
+                user_lephon_nell_state += 1
                 self.user.current_map.steps_modified = True
-            if self.user.lephon_nell_state != 0:
-                self.user.current_map.overwrite_steps = [Step().from_dict(s) for s in MapParser.get_lephon_nell_phase(self.user.lephon_nell_state)]
+            if user_lephon_nell_state != 0:
+                self.user.current_map.overwrite_steps = [Step().from_dict(s) for s in MapParser.get_lephon_nell_phase(user_lephon_nell_state)]
                 
-            self.c.execute('''update user_world_map set lephon_nell_state = :y where user_id = :x''', {'x': self.user.user_id, 'y': self.user.lephon_nell_state})
+            self.c.execute('''update user_world_map set lephon_nell_state = :y where user_id = :x''', {'x': self.user.user_id, 'y': user_lephon_nell_state})
             self.select_map_info()
 
         self.prev_capture = self.curr_capture
         self.prev_position = self.curr_position
 
         # Phase 2
-        if self.user.lephon_nell_state == 1:
+        if user_lephon_nell_state == 1:
             self.curr_position = 44
             self.curr_capture = 1
             self.prev_capture = self.curr_capture
@@ -420,7 +422,7 @@ class UserMap(Map):
             return
         
         # Phase 3
-        if self.user.lephon_nell_state == 2:
+        if user_lephon_nell_state == 2:
             self.curr_position = 200
             self.curr_capture = 1
             self.prev_capture = self.curr_capture
@@ -428,7 +430,7 @@ class UserMap(Map):
             return
 
         # Phase 4
-        if self.user.lephon_nell_state == 3 and self.prev_position == 200:
+        if user_lephon_nell_state == 3 and self.prev_position == 200:
             self.curr_position = 65
             self.curr_capture = 1
             self.prev_capture = self.curr_capture
