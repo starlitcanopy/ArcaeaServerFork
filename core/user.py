@@ -597,6 +597,18 @@ class UserInfo(User):
 
         return self
 
+    @property
+    def lephon_nell_state(self) -> int:
+        result = 0
+        self.c.execute('''select lephon_nell_state from user_world_map where user_id = :x''', {'x': self.user_id})
+        x = self.c.fetchone()
+        if x:
+            result = x[0]
+        else:
+            self.c.execute('''insert into user_world_map values(:a,0)''', {
+                        'a': self.user_id})
+        return result
+
     def select_user(self) -> None:
         # 查user表所有信息
         self.c.execute(

@@ -9,17 +9,6 @@ from .constant import Constant
 from .error import InputError, MapLocked, NoData
 from .item import ItemFactory
 
-def get_user_lephon_nell_state(c, user_id) -> int:
-    result = 0
-    c.execute('''select lephon_nell_state from user_world_map where user_id = :x''', {'x': user_id})
-    x = c.fetchone()
-    if x:
-        result = x[0]
-    else:
-        c.execute('''insert into user_world_map values(:a,0)''', {
-                    'a': user_id})
-    return result
-
 class MapParser:
 
     map_id_path: 'dict[str, str]' = {}
@@ -350,14 +339,12 @@ class UserMap(Map):
             self.curr_capture = 0
             self.is_locked = True
             self.initialize()
-        
-        user_lephon_nell_state = get_user_lephon_nell_state(self.c, self.user.user_id)
 
-        self.lephon_final = user_lephon_nell_state == 3
+        self.lephon_final = self.user.lephon_nell_state == 3
         self.lephon_active = self.lephon_final
         
-        if user_lephon_nell_state <= 3 and self.map_id == 'lephon_nell':
-            self.overwrite_steps = [Step().from_dict(s) for s in MapParser.get_lephon_nell_phase(user_lephon_nell_state)]
+        if self.user.lephon_nell_state <= 3 and self.map_id == 'lephon_nell':
+            self.overwrite_steps = [Step().from_dict(s) for s in MapParser.get_lephon_nell_phase(self.user.lephon_nell_state)]
         
         self.select_map_info() # Update with overwrite_steps
         x: 'Step' = self.steps[self.curr_position]
@@ -404,22 +391,21 @@ class UserMap(Map):
             raise InputError('`Step_value` must be non-negative.')
 
         if self.user.current_map.map_id == "lephon_nell":
-            user_lephon_nell_state = get_user_lephon_nell_state(self.c, self.user.user_id)
             # If on phase 1 and player is on wall_impossible, switch phase
-            if user_lephon_nell_state == 0:
+            if self.user.lephon_nell_state == 0:
                 x: 'Step' = self.user.current_map.steps_for_climbing[-1]
                 if x.step_type and "wall_impossible" in x.step_type:
                     self.user.current_map.steps_modified = True
-                    user_lephon_nell_state = 1
+                    self.user.lephon_nell_state = 1
             
             # If alrrady on phase and not at final phase, we switch
-            if user_lephon_nell_state > 0 and user_lephon_nell_state < 3:
-                user_lephon_nell_state += 1
+            if self.user.lephon_nell_state > 0 and self.user.lephon_nell_state < 3:
+                self.user.lephon_nell_state += 1
                 self.user.current_map.steps_modified = True
-            if user_lephon_nell_state != 0:
-                self.user.current_map.overwrite_steps = [Step().from_dict(s) for s in MapParser.get_lephon_nell_phase(user_lephon_nell_state)]
+            if self.user.lephon_nell_state != 0:
+                self.user.current_map.overwrite_steps = [Step().from_dict(s) for s in MapParser.get_lephon_nell_phase(self.user.lephon_nell_state)]
                 
-            self.c.execute('''update user_world_map set lephon_nell_state = :y where user_id = :x''', {'x': self.user.user_id, 'y': user_lephon_nell_state})
+            self.c.execute('''update user_world_map set lephon_nell_state = :y where user_id = :x''', {'x': self.user.user_id, 'y': self.user.lephon_nell_state})
             self.select_map_info()
 
         self.prev_capture = self.curr_capture
