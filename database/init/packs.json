@@ -877,7 +877,9 @@
 				"id": "core_generic",
 				"is_available": true
 			}
-		]
+		],
+		"orig_price": 500,
+		"price": 500
 	},
 	{
 		"name": "ongeki_append_2",
@@ -889,10 +891,12 @@
 			},
 			{
 				"type": "core",
-				"amount": 5,
+				"amount": 4,
 				"id": "core_generic",
 				"is_available": true
 			}
-		]
+		],
+		"orig_price": 400,
+		"price": 400
 	}
 ]
