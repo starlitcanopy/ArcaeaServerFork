@@ -28,7 +28,7 @@
         "requirements": [],
         "flag_as_hidden_when_requirements_not_met": false,
         "dan_name": "Phase 1",
-        "course_name": "新世界的第一步",
+        "course_name": "First Step in a New World",
         "can_start": true,
         "is_completed": false,
         "high_score": 0,
@@ -67,7 +67,7 @@
         "requirements": [],
         "flag_as_hidden_when_requirements_not_met": false,
         "dan_name": "Phase 2",
-        "course_name": "一次心跳的加速",
+        "course_name": "Swept up in a Heartbeat",
         "can_start": true,
         "is_completed": false,
         "high_score": 0,
@@ -106,7 +106,7 @@
         "requirements": [],
         "flag_as_hidden_when_requirements_not_met": false,
         "dan_name": "Phase 3",
-        "course_name": "永不屈服的精神",
+        "course_name": "Unceasing Spirit",
         "can_start": true,
         "is_completed": false,
         "high_score": 0,
@@ -145,7 +145,7 @@
         "requirements": [],
         "flag_as_hidden_when_requirements_not_met": false,
         "dan_name": "Phase 4",
-        "course_name": "光芒的永恒之地",
+        "course_name": "The Eternal Realm of Light",
         "can_start": true,
         "is_completed": false,
         "high_score": 0,
@@ -184,7 +184,7 @@
         "requirements": [],
         "flag_as_hidden_when_requirements_not_met": false,
         "dan_name": "Phase 5",
-        "course_name": "玻璃之中的残酷",
+        "course_name": "The Brutality of Glass",
         "can_start": true,
         "is_completed": false,
         "high_score": 0,
@@ -223,7 +223,7 @@
         "requirements": [],
         "flag_as_hidden_when_requirements_not_met": false,
         "dan_name": "Phase 6",
-        "course_name": "沉浸于悲喜交加",
+        "course_name": "In Grief and Great Delight",
         "can_start": true,
         "is_completed": false,
         "high_score": 0,
@@ -262,7 +262,7 @@
         "requirements": [],
         "flag_as_hidden_when_requirements_not_met": false,
         "dan_name": "Phase 7",
-        "course_name": "在命运到来之际",
+        "course_name": "On Fate's Approach",
         "can_start": true,
         "is_completed": false,
         "high_score": 0,
@@ -301,7 +301,7 @@
         "requirements": [],
         "flag_as_hidden_when_requirements_not_met": false,
         "dan_name": "Phase 8",
-        "course_name": "趋于混沌的时空",
+        "course_name": "The Disfigured Flow of Time",
         "can_start": true,
         "is_completed": false,
         "high_score": 0,
@@ -337,15 +337,10 @@
             }
         ],
         "gauge_requirement": "default",
-        "requirements": [
-            {
-                "value": "4.0-dan-8",
-                "type": "course"
-            }
-        ],
-        "flag_as_hidden_when_requirements_not_met": true,
+        "requirements": [],
+        "flag_as_hidden_when_requirements_not_met": false,
         "dan_name": "Phase 9",
-        "course_name": "分崩离析的自我",
+        "course_name": "Ego's Demise",
         "can_start": true,
         "is_completed": false,
         "high_score": 0,
@@ -361,36 +356,31 @@
         "style": 10,
         "songs": [
             {
-                "flag_as_hidden": true,
+                "flag_as_hidden": false,
                 "difficulty": 2,
                 "id": "cyaegha"
             },
             {
-                "flag_as_hidden": true,
+                "flag_as_hidden": false,
                 "difficulty": 2,
                 "id": "divinelight"
             },
             {
-                "flag_as_hidden": true,
+                "flag_as_hidden": false,
                 "difficulty": 2,
                 "id": "dantalion"
             },
             {
-                "flag_as_hidden": true,
+                "flag_as_hidden": false,
                 "difficulty": 2,
                 "id": "aegleseeker"
             }
         ],
         "gauge_requirement": "default",
-        "requirements": [
-            {
-                "value": "4.0-dan-9",
-                "type": "course"
-            }
-        ],
-        "flag_as_hidden_when_requirements_not_met": true,
+        "requirements": [],
+        "flag_as_hidden_when_requirements_not_met": false,
         "dan_name": "Phase 10",
-        "course_name": "光与对立的洪流",
+        "course_name": "A Torrent of Light and Conflict",
         "can_start": true,
         "is_completed": false,
         "high_score": 0,
@@ -406,36 +396,31 @@
         "style": 11,
         "songs": [
             {
-                "flag_as_hidden": true,
+                "flag_as_hidden": false,
                 "difficulty": 3,
                 "id": "infinitestrife"
             },
             {
-                "flag_as_hidden": true,
+                "flag_as_hidden": false,
                 "difficulty": 2,
                 "id": "grievouslady"
             },
             {
-                "flag_as_hidden": true,
+                "flag_as_hidden": false,
                 "difficulty": 2,
                 "id": "fractureray"
             },
             {
-                "flag_as_hidden": true,
+                "flag_as_hidden": false,
                 "difficulty": 3,
                 "id": "tempestissimo"
             }
         ],
         "gauge_requirement": "default",
-        "requirements": [
-            {
-                "value": "4.0-dan-10",
-                "type": "course"
-            }
-        ],
-        "flag_as_hidden_when_requirements_not_met": true,
+        "requirements": [],
+        "flag_as_hidden_when_requirements_not_met": false,
         "dan_name": "Phase 11",
-        "course_name": "创世之曙光",
+        "course_name": "Radiant Genesis",
         "can_start": true,
         "is_completed": false,
         "high_score": 0,
@@ -444,6 +429,46 @@
             "fragment2000",
             "core_generic_20",
             "course_banner_11"
+        ]
+    },
+    {
+        "course_id": "4.0-dan-12",
+        "style": 12,
+        "songs": [
+            {
+                "flag_as_hidden": false,
+                "difficulty": 2,
+                "id": "abstrusedilemma"
+            },
+            {
+                "flag_as_hidden": false,
+                "difficulty": 3,
+                "id": "worldender"
+            },
+            {
+                "flag_as_hidden": false,
+                "difficulty": 4,
+                "id": "alterego"
+            },
+            {
+                "flag_as_hidden": false,
+                "difficulty": 3,
+                "id": "designant"
+            }
+        ],
+        "gauge_requirement": "default",
+        "requirements": [],
+        "flag_as_hidden_when_requirements_not_met": false,
+        "dan_name": "Phase 12",
+        "course_name": "Irruption of New Color",
+        "can_start": true,
+        "is_completed": false,
+        "high_score": 0,
+        "best_clear_type": -1,
+        "rewards": [
+            "fragment2000",
+            "core_generic_20",
+            "course_banner_12"
         ]
     }
 ]
