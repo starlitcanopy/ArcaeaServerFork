@@ -365,8 +365,8 @@ class UserPlay(UserScore):
                     self.beyond_boost_gauge_usage = 0
 
         self.clear_play_state()
-        self.c.execute('''insert into songplay_token values(:t,:a,:b,:c,'',-1,0,0,:d,:e,:f,:g,:h)''', {
-            'a': self.user.user_id, 'b': self.song.song_id, 'c': self.song.difficulty, 'd': self.stamina_multiply, 'e': self.fragment_multiply, 'f': self.prog_boost_multiply, 'g': self.beyond_boost_gauge_usage, 'h': self.skill_cytusii_flag, 't': self.song_token})
+        self.c.execute('''insert into songplay_token values(:t,:a,:b,:c,'',-1,0,0,:d,:e,:f,:g,:h,:i,:j)''', {
+            'a': self.user.user_id, 'b': self.song.song_id, 'c': self.song.difficulty, 'd': self.stamina_multiply, 'e': self.fragment_multiply, 'f': self.prog_boost_multiply, 'g': self.beyond_boost_gauge_usage, 'h': self.skill_cytusii_flag, 'i': self.skill_chinatsu_flag, 'j': self.invasion_flag, 't': self.song_token})
 
         self.user.select_user_about_current_map()
         self.user.current_map.select_map_info()
