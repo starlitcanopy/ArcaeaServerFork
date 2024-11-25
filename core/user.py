@@ -338,6 +338,12 @@ class UserInfo(User):
         self.__course_banners: list = None
 
     @property
+    def is_insight_enabled(self) -> bool:
+        if self.insight_state is None:
+            self.select_user_one_column('insight_state', 4, int)
+        return self.insight_state == 3 or self.insight_state == 5
+
+    @property
     def cores(self) -> list:
         if self.__cores is None:
             x = UserItemList(self.c, self).select_from_type('core')
@@ -811,6 +817,20 @@ class UserOnline(UserInfo):
         self.c.execute('''update user set favorite_character = :a where user_id = :b''',
                        {'a': self.favorite_character.character_id, 'b': self.user_id})
 
+    # Note: This implementation is different from Lost's as it tries to mimic official game
+    def toggle_invasion(self) -> None:
+        self.c.execute(
+            '''select insight_state from user where user_id = ?''', (self.user_id,))
+        x = self.c.fetchone()
+        if not x:
+            raise NoData('No user.', 108, -3)
+        self.insight_state = x[0]
+        if self.insight_state == 3:
+            self.insight_state = 4
+        elif self.insight_state == 4:
+            self.insight_state = 3
+        self.c.execute(
+            '''update user set insight_state = ? where user_id = ?''', (self.insight_state, self.user_id))
 
 class UserChanger(UserInfo, UserRegister):
 
