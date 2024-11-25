@@ -52,6 +52,8 @@ def score_token_world(user_id):
             "stamina": x.user.stamina.stamina,
             "max_stamina_ts": x.user.stamina.max_stamina_ts,
             "token": x.song_token,
+            "play_parameters": {},
+            "beyond_boost_gauge": x.user.beyond_boost_gauge
         }
         if skill_cytusii_flag and skill_id:
             r['play_parameters'] = {
