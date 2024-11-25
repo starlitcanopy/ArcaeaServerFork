@@ -531,11 +531,11 @@ class UserMap(Map):
                 self.curr_position = i
                 self.curr_capture = j
 
-    def reclimb(self, step_value: float) -> None:
+    def reclimb(self, step_value: float, user_play: any) -> None:
         '''重新爬梯子计算'''
         self.curr_position = self.prev_position
         self.curr_capture = self.prev_capture
-        self.climb(step_value)
+        self.climb(step_value, user_play)
 
 
 class Stamina:
@@ -670,14 +670,14 @@ class WorldSkillMixin:
         if fragment_flag:
             self.character_bonus_progress_normalized = Constant.ETO_UNCAP_BONUS_PROGRESS
 
-        self.user.current_map.reclimb(self.final_progress)
+        self.user.current_map.reclimb(self.final_progress, self.user_play)
 
     def _luna_uncap(self) -> None:
         '''luna觉醒技能，限制格开始时世界模式进度加 7，偷懒重爬（因为 map 信息还未获取）'''
         x: 'Step' = self.user.current_map.steps_for_climbing[0]
         if x.restrict_id and x.restrict_type:
             self.self.character_bonus_progress_normalized = Constant.LUNA_UNCAP_BONUS_PROGRESS
-            self.user.current_map.reclimb(self.final_progress)
+            self.user.current_map.reclimb(self.final_progress, self.user_play)
 
     def _ayu_uncap(self) -> None:
         '''ayu 觉醒技能，世界模式进度随机变动 [-5, -5]，但不会小于 0'''
@@ -688,7 +688,7 @@ class WorldSkillMixin:
         if self.progress_normalized + self.character_bonus_progress_normalized < 0:
             self.character_bonus_progress_normalized = -self.progress_normalized
 
-        self.user.current_map.reclimb(self.final_progress)
+        self.user.current_map.reclimb(self.final_progress, self.user_play)
 
     def _skill_fatalis(self) -> None:
         '''hikari fatalis技能，世界模式超载，打完休息60分钟'''
@@ -704,7 +704,7 @@ class WorldSkillMixin:
         x: 'Step' = self.user.current_map.steps_for_climbing[0]
         if ('randomsong' in x.step_type or 'speedlimit' in x.step_type) and self.user_play.song_grade < 5:
             self.character_bonus_progress_normalized = -self.progress_normalized / 2
-            self.user.current_map.reclimb(self.final_progress)
+            self.user.current_map.reclimb(self.final_progress, self.user_play)
 
     def _ilith_awakened_skill(self) -> None:
         '''
@@ -758,7 +758,7 @@ class WorldSkillMixin:
         '''
         if self.character_used.skill_flag:
             self.character_bonus_progress_normalized = self.progress_normalized
-            self.user.current_map.reclimb(self.final_progress)
+            self.user.current_map.reclimb(self.final_progress, self.user_play)
         self.character_used.change_skill_state()
 
     def _skill_kanae_uncap(self) -> None:
@@ -770,7 +770,7 @@ class WorldSkillMixin:
         '''
         if self.user.current_map.stamina_cost > 0:
             self.kanae_stored_progress = self.progress_normalized
-            self.user.current_map.reclimb(self.final_progress)
+            self.user.current_map.reclimb(self.final_progress, self.user_play)
 
     def _skill_eto_hoppe(self) -> None:
         '''
@@ -778,7 +778,7 @@ class WorldSkillMixin:
         '''
         if self.user.stamina.stamina >= 6:
             self.character_bonus_progress_normalized = self.progress_normalized
-            self.user.current_map.reclimb(self.final_progress)
+            self.user.current_map.reclimb(self.final_progress, self.user_play)
 
     def _skill_chinatsu(self) -> None:
         '''
@@ -797,7 +797,7 @@ class WorldSkillMixin:
         '''
         if self.user_play.invasion_flag:
             self.character_bonus_progress_normalized = self.progress_normalized
-            self.user.current_map.reclimb(self.final_progress)
+            self.user.current_map.reclimb(self.final_progress, self.user_play)
 
 class BaseWorldPlay(WorldSkillMixin):
     '''
@@ -1188,6 +1188,6 @@ class BreachedWorldPlay(BeyondWorldPlay, WorldLawMixin):
         self.before_update()
         self.before_calculate()
         self.breached_before_calculate()
-        self.user.current_map.climb(self.final_progress)
+        self.user.current_map.reclimb(self.final_progress, self.user_play)
         self.after_climb()
         self.after_update()
