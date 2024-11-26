@@ -395,12 +395,12 @@ class UserMap(Map):
         if self.is_beyond and step_value < 0:
             raise InputError('`Step_value` must be non-negative.')
 
+        cur_step: 'Step' = self.steps[self.curr_position]
         user_lephon_nell_state = self.user.lephon_nell_state
         if self.user.current_map.map_id == "lephon_nell":
             # If on phase 1 and player is on wall_impossible, switch phase
             if user_lephon_nell_state == 0:
-                x: 'Step' = self.user.current_map.steps_for_climbing[-1]
-                if x.step_type and "wall_impossible" in x.step_type:
+                if cur_step.step_type and "wall_impossible" in cur_step.step_type:
                     self.user.current_map.steps_modified = True
                     user_lephon_nell_state = 1
             
@@ -441,8 +441,7 @@ class UserMap(Map):
             self.prev_position = self.curr_position
             return
 
-        x: 'Step' = self.steps[self.curr_position]
-        if x.step_type:
+        if cur_step.step_type:
             if not self.lephon_final and self.lephon_active:
                 if user_play.nell_toggle:
                     i = self.curr_position
@@ -465,9 +464,9 @@ class UserMap(Map):
                         self.curr_capture = j
                 else:
                     step_value = 0
-            if not self.lephon_final and "wall_impossible" in x.step_type:
+            if not self.lephon_final and "wall_impossible" in cur_step.step_type:
                 step_value = 0
-            if self.lephon_final and "special_lament_rain" in x.step_type:
+            if self.lephon_final and "special_lament_rain" in cur_step.step_type:
                 step_value = 0
 
         if self.lephon_final:
