@@ -252,6 +252,7 @@ class UserPlay(UserScore):
         self.lowest_health: int = None
 
         self.invasion_flag: int = None  # 1: invasion_start, 2: invasion_hard
+        self.nell_toggle: bool = False
 
     def to_dict(self) -> dict:
         # 不能super

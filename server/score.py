@@ -116,6 +116,7 @@ def score_token_course(user_id):
 def song_score_post(user_id):
     with Connect() as c:
         x = UserPlay(c, UserOnline(c, user_id))
+        x.nell_toggle = request.args.get("nell_toggle",type=bool)
         x.song_token = request.form['song_token']
         x.song_hash = request.form['song_hash']
         x.song.set_chart(
