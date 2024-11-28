@@ -6,7 +6,7 @@ from werkzeug.datastructures import ImmutableMultiDict
 
 from core.bundle import BundleDownload
 from core.download import DownloadList
-from core.error import RateLimit
+from core.error import ArcError, RateLimit
 from core.item import ItemCharacter
 from core.notification import NotificationFactory
 from core.sql import Connect
@@ -100,6 +100,41 @@ def finale_end(user_id):
         item.user_claim_item(UserOnline(c, user_id))
         return success_return({})
 
+@bp.route('/insight/me/complete/eden_append_1', methods=['POST'])
+@auth_required(request)
+@arc_try
+def complete_eden(user_id):
+    with Connect() as c:
+        user = UserOnline(c, user_id)
+        user.select_user()
+
+        if user.insight_state == 1:
+            raise ArcError('Cannot call this api.', 151, status=403)
+        item = ItemCharacter(c)
+        item.set_id('72')  # Insight (Ascendant - 8th Seeker)
+        item.user_claim_item(user)
+        user.update_user_one_column("insight_state", 1)
+
+        return success_return({
+            "insight_state": user.insight_state
+        })
+
+@bp.route('/insight/me/complete/lephon', methods=['POST'])
+@auth_required(request)
+@arc_try
+def complete_lephon(user_id):
+    with Connect() as c:
+        user = UserOnline(c, user_id)
+        user.select_user()
+
+        if user.insight_state == 3 or user.insight_state == 4:
+            raise ArcError('Cannot call this api.', 151, status=403)
+        c.execute('''update user_world_map set lephon_nell_state = :y where user_id = :x''', {'x': user_id, 'y': 4})
+        user.update_user_one_column("insight_state", 3)
+
+        return success_return({
+            "insight_state": user.insight_state
+        })
 
 @bp.route('/applog/me/log', methods=['POST'])
 def applog_me():
