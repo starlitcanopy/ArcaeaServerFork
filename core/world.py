@@ -1061,6 +1061,7 @@ class BeyondWorldPlay(BaseWorldPlay):
 
     def __init__(self, c=None, user=None, user_play=None) -> None:
         super().__init__(c, user, user_play)
+        
         self.over_skill_increase: float = None
 
     @property
@@ -1157,6 +1158,7 @@ class BreachedWorldPlay(BeyondWorldPlay, WorldLawMixin):
     def __init__(self, c=None, user=None, user_play=None) -> None:
         super().__init__(c, user, user_play)
         self.new_law_prog: float = None
+        self.prog_skill_increase: float = None
 
     @property
     def new_law_multiply(self) -> float:
