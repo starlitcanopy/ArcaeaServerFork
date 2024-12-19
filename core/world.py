@@ -512,7 +512,10 @@ class UserMap(Map):
             while t > 0 and i < self.step_count:
                 x: 'Step' = self.steps[i]
                 if x.step_type:
-                    if "wall_impossible" in x.step_type:
+                    # Prevent advancing through wall_nell (seems to be intentional from what testing told me)
+                    # We check for wall_nell here since this code segment never gets called when
+                    # "lephon" is active
+                    if "wall_impossible" in x.step_type or "wall_nell" in x.step_type:
                         break
 
                 dt = self.steps[i].capture - j
