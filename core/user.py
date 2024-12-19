@@ -825,10 +825,19 @@ class UserOnline(UserInfo):
         if not x:
             raise NoData('No user.', 108, -3)
         self.insight_state = x[0]
+
+        # Insight (locked state)
         if self.insight_state == 3:
             self.insight_state = 4
         elif self.insight_state == 4:
             self.insight_state = 3
+
+        # Insight (unlocked state)
+        if self.insight_state == 5:
+            self.insight_state = 6
+        elif self.insight_state == 6:
+            self.insight_state = 5
+
         self.c.execute(
             '''update user set insight_state = ? where user_id = ?''', (self.insight_state, self.user_id))
 

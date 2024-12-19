@@ -296,6 +296,8 @@ class UserCharacter(Character):
             self.voice = [0, 1, 2, 3, 100, 1000, 1001]
 
         self.select_character_core()
+        if self.character_id == 72:
+            self.update_insight_state()
 
     def to_dict(self) -> dict:
         if self.char_type is None:
@@ -414,6 +416,8 @@ class UserCharacter(Character):
 
         self.c.execute('''update user_char set level=?, exp=? where user_id=? and character_id=?''',
                        (self.level.level, self.level.exp, self.user.user_id, self.character_id))
+        if self.character_id == 72:
+            self.update_insight_state()
 
     def upgrade_by_core(self, user=None, core=None):
         '''
@@ -441,6 +445,14 @@ class UserCharacter(Character):
         self.skill_flag = not self.skill_flag
         self.c.execute(f'''update {self.database_table_name} set skill_flag = ? where user_id = ? and character_id = ?''', (
             1 if self.skill_flag else 0, self.user.user_id, self.character_id))
+        
+    def update_insight_state(self) -> None:
+        if self.level.level == self.level.max_level:
+            if self.user.insight_state == 3:
+                self.select_user_one_column('insight_state', 5, int)
+            elif self.user.insight_state == 4:
+                self.select_user_one_column('insight_state', 6, int)
+
 
 
 class UserCharacterList:
