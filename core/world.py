@@ -926,6 +926,7 @@ class BaseWorldPlay(WorldSkillMixin):
         else:
             self.character_used.character_id = self.user.character.character_id
             self.character_used.level.level = self.user.character.level.level
+            self.character_used.level.max_level = self.user.character.level.max_level
             self.character_used.level.exp = self.user.character.level.exp
             self.character_used.frag.set_parameter(50, 50, 50)
             self.character_used.prog.set_parameter(50, 50, 50)
