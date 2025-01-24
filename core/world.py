@@ -900,7 +900,7 @@ class WorldSkillMixin:
             if user_map.curr_position >= user_map.steps[-1].position:
                 completed += 1
 
-        self.salt_added_progress = completed / total * 10
+        self.character_bonus_progress_normalized = completed / total * 10
 
 
 class BaseWorldPlay(WorldSkillMixin):
@@ -1089,8 +1089,6 @@ class WorldPlay(BaseWorldPlay):
         self.kanae_stored_progress: float = None  # 往群愿里塞
         # self.user.kanae_stored_prog: float 群愿有的
 
-        self.salt_added_progress: float = None # salt my beloved
-
     def to_dict(self) -> dict:
         r = super().to_dict()
 
@@ -1148,7 +1146,6 @@ class WorldPlay(BaseWorldPlay):
             * self.step_times
             + (self.kanae_added_progress or 0)
             - (self.kanae_stored_progress or 0)
-            + (self.salt_added_progress or 0)
         )
 
     @property
