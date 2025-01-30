@@ -30,7 +30,7 @@ class Constant:
     LUNA_UNCAP_BONUS_PROGRESS = 7
     AYU_UNCAP_BONUS_PROGRESS = 5
     SKILL_FATALIS_WORLD_LOCKED_TIME = 3600000
-    SKILL_MIKA_SONGS = ['aprilshowers', 'seventhsense', 'oshamascramble',
+    SKILL_MIKA_SONGS = ['aprilshowers', 'seventhsense', 'oshamascramble', 'breakbreak', 'straightintolights', 'virtus', 'yomibitoshirazu',
                         'amazingmightyyyy', 'cycles', 'maxrage', 'infinity', 'temptation']
 
     MAX_FRIEND_COUNT = Config.MAX_FRIEND_COUNT
