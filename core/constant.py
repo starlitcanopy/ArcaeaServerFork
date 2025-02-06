@@ -1,6 +1,6 @@
 from .config_manager import Config
 
-ARCAEA_SERVER_VERSION = 'v2.12.0.3'
+ARCAEA_SERVER_VERSION = 'v2.12.0.4'
 ARCAEA_DATABASE_VERSION = 'v2.12.0.4'
 ARCAEA_LOG_DATBASE_VERSION = 'v1.1'
 
@@ -32,6 +32,7 @@ class Constant:
     SKILL_FATALIS_WORLD_LOCKED_TIME = 3600000
     SKILL_MIKA_SONGS = ['aprilshowers', 'seventhsense', 'oshamascramble', 'breakbreak', 'straightintolights', 'virtus', 'yomibitoshirazu',
                         'amazingmightyyyy', 'cycles', 'maxrage', 'infinity', 'temptation']
+    FATALIS_MAX_VALUE = 100
 
     MAX_FRIEND_COUNT = Config.MAX_FRIEND_COUNT
 
@@ -67,7 +68,6 @@ class Constant:
     LINKPLAY_AUTHENTICATION = Config.LINKPLAY_AUTHENTICATION
     LINKPLAY_TCP_SECRET_KEY = Config.LINKPLAY_TCP_SECRET_KEY
     LINKPLAY_TCP_MAX_LENGTH = 0x0FFFFFFF
-
 
     LINKPLAY_MATCH_GET_ROOMS_INTERVAL = 4  # Units: seconds
     LINKPLAY_MATCH_PTT_ABS = [5, 20, 50, 100, 200, 500, 1000, 2000]
