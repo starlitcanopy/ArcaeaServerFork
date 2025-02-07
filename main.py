@@ -1,13 +1,27 @@
 # encoding: utf-8
 
 import os
+import sys
+import importlib.util
 from importlib import import_module
 
 from core.config_manager import Config, ConfigManager
 
 if os.path.exists('config.py') or os.path.exists('config'):
     # 导入用户自定义配置
-    ConfigManager.load(import_module('config').Config)
+    ConfigManager.load(import_module("config").Config)
+else:
+    # Allow importing the config from a custom path given through an environment variable
+    configPath = os.environ.get("ARCAEA_CONFIG_PATH")
+    if os.path.exists(configPath):
+        # Taken from the python docs
+        # https://docs.python.org/3/library/importlib.html#importing-a-source-file-directly
+        spec = importlib.util.spec_from_file_location("config", configPath)
+        module = importlib.util.module_from_spec(spec)
+        sys.modules["config"] = module
+        spec.loader.exec_module(module)
+        ConfigManager.load(module.Config)
+
 
 if Config.DEPLOY_MODE == 'gevent':
     # 异步
@@ -171,7 +185,6 @@ def generate_log_file_dict(level: str, filename: str) -> dict:
 
 
 def main():
-    print(Config.LOG_BASE_DIR)
     log_dict = {
         'version': 1,
         'root': {
