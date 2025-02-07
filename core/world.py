@@ -520,6 +520,7 @@ class UserMap(Map):
                     else:
                         self.curr_position = i
                         self.curr_capture = j
+                    return
                 else:
                     step_value = 0
             if not self.lephon_final and "wall_impossible" in cur_step.step_type:
