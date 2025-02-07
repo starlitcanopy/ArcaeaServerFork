@@ -541,12 +541,10 @@ class Potential:
     @property
     def value(self) -> float:
         '''计算用户潜力值'''
-        return self.best_30 * Constant.BEST30_WEIGHT + self.recent_10 * Constant.RECENT10_WEIGHT
+        return self.best_n(30) * Constant.BEST30_WEIGHT + self.best_n(10) * Constant.RECENT10_WEIGHT
 
-    @property
-    def best_30(self) -> float:
-        '''获取用户best30的总潜力值'''
-        self.c.execute('''select rating from best_score where user_id = :a order by rating DESC limit 30''', {
+    def best_n(self, n) -> float:
+        self.c.execute(f'''select rating from best_score where user_id = :a order by rating DESC limit {n}''', {
             'a': self.user.user_id})
         return sum(x[0] for x in self.c.fetchall())
 
