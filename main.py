@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+import json
 import os
 import sys
 import importlib.util
@@ -12,15 +13,10 @@ if os.path.exists('config.py') or os.path.exists('config'):
     ConfigManager.load(import_module("config").Config)
 else:
     # Allow importing the config from a custom path given through an environment variable
-    configPath = os.environ.get("ARCAEA_CONFIG_PATH")
+    configPath = os.environ.get("ARCAEA_JSON_CONFIG_PATH")
     if os.path.exists(configPath):
-        # Taken from the python docs
-        # https://docs.python.org/3/library/importlib.html#importing-a-source-file-directly
-        spec = importlib.util.spec_from_file_location("config", configPath)
-        module = importlib.util.module_from_spec(spec)
-        sys.modules["config"] = module
-        spec.loader.exec_module(module)
-        ConfigManager.load(module.Config)
+        with open(configPath, 'r') as file:
+            ConfigManager.load_dict(json.load(file))
 
 
 if Config.DEPLOY_MODE == 'gevent':
