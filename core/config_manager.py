@@ -81,11 +81,17 @@ class Config:
     ALLOW_SELF_ACCOUNT_DELETE = False
 
     # ------------------------------------------
-
     # You can change this to make another PTT mechanism.
-    BEST30_WEIGHT = 1 / 40
-    RECENT10_WEIGHT = 1 / 40
-
+    #
+    # Every element of the list is a pair containing:
+    # - the kind of the factor ("best" or "recent")
+    # - the amount of scores to add up for the factor
+    # - the weight the sum of said scores should have
+    #
+    # Note: the "recent" components will currently take the best
+    #       N scores out of the recent 30 only. Setting the amount
+    #       to >30 will not work as expected.
+    PTT_FORMULA = [("best", 30, 1 / 40), ("recent", 10, 1 / 40)]
 
     INVASION_START_WEIGHT = 0.1
     INVASION_HARD_WEIGHT = 0.1
