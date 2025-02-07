@@ -55,7 +55,7 @@ class MapParser:
 
         for i in range(4):
             self.map_lephon_nell_phases[i] = os.path.join(
-                "./database/map_lephon_nell", f"{i+1}.json"
+                Config.WORLD_MAP_LEPHON_NELL_FOLDER_PATH, f"{i+1}.json"
             )
 
     def re_init(self) -> None:
