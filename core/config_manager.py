@@ -113,10 +113,13 @@ class Config:
 
 
 class ConfigManager:
-
     @staticmethod
     def load(config) -> None:
-        for k, v in config.__dict__.items():
+        ConfigManager.load_dict(config.__dict__)
+
+    @staticmethod
+    def load_dict(config) -> None:
+        for k, v in config.items():
             if k.startswith('__') or k.endswith('__'):
                 continue
             if hasattr(Config, k):
