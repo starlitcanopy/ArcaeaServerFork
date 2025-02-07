@@ -84,7 +84,15 @@ class MapParser:
         `c` - 数据库连接
         """
         return [UserMap(c, map_id, user) for map_id in MapParser.map_id_path.keys()]
+    
+    @staticmethod
+    @lru_cache(maxsize=128)
+    def get_lephon_nell_phase(phase: int) -> list:
+        steps = []
+        with open(MapParser.map_lephon_nell_phases[phase], "rb") as f:
+            steps = load(f)
 
+        return steps["steps"]
 
 class Step:
     """台阶类"""
