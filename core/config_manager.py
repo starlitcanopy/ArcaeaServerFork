@@ -65,6 +65,7 @@ class Config:
 
     ALLOW_SCORE_WITH_NO_SONG = True
 
+    LOG_BASE_DIR = "./log"
     ALLOW_INFO_LOG = False
     ALLOW_WARNING_LOG = False
 
@@ -85,7 +86,7 @@ class Config:
     # You can change this to make another PTT mechanism.
     BEST30_WEIGHT = 1 / 40
     RECENT10_WEIGHT = 1 / 40
-    
+
     INVASION_START_WEIGHT = 0.1
     INVASION_HARD_WEIGHT = 0.1
 
@@ -108,7 +109,7 @@ class Config:
 
 
     NOTIFICATION_EXPIRE_TIME = 3 * 60 * 1000
-    
+
 
 
 class ConfigManager:
