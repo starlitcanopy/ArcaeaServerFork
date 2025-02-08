@@ -117,6 +117,9 @@ class Config:
 
     NOTIFICATION_EXPIRE_TIME = 3 * 60 * 1000
 
+    # Do not disable unless you know what you're doing
+    SONG_HASH_CHECKS = True
+
 
 class ConfigManager:
     @staticmethod

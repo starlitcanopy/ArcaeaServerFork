@@ -285,7 +285,8 @@ class UserPlay(UserScore):
         from .download import get_song_file_md5
         songfile_hash = get_song_file_md5(
             self.song.song_id, str(self.song.difficulty) + '.aff')
-        if songfile_hash and songfile_hash != self.song_hash:
+
+        if Config.SONG_HASH_CHECKS and songfile_hash and songfile_hash != self.song_hash:
             return False
 
         x = f'''{self.song_token}{self.song_hash}{self.song.song_id}{self.song.difficulty}{self.score}{self.shiny_perfect_count}{
@@ -305,7 +306,7 @@ class UserPlay(UserScore):
         y = f'{self.user.user_id}{self.song_hash}'
         checksum = md5(x+md5(y))
 
-        if checksum != self.submission_hash:
+        if Config.SONG_HASH_CHECKS and checksum != self.submission_hash:
             return False
 
         return True
