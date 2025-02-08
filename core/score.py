@@ -94,10 +94,10 @@ class Score:
     def is_valid(self) -> bool:
         '''分数有效性检查'''
         if self.shiny_perfect_count < 0 or self.perfect_count < 0 or self.near_count < 0 or self.miss_count < 0 or self.score < 0 or self.time_played <= 0:
-            app.logger.info('Negative count in score')
+            # app.logger.info('Negative count in score')
             return False
         if self.song.difficulty not in (0, 1, 2, 3, 4):
-            app.logger.info('Invalid difficulty')
+            # app.logger.info('Invalid difficulty')
             return False
 
         all_note = self.all_note_count
@@ -107,7 +107,7 @@ class Score:
         calc_score = 10000000 / all_note * \
             (self.perfect_count + self.near_count/2) + self.shiny_perfect_count
         if abs(calc_score - self.score) >= 5:
-            app.logger.info('Score calculated poorly')
+            # app.logger.info('Score calculated poorly')
             return False
 
         return True
@@ -287,28 +287,28 @@ class UserPlay(UserScore):
         from .download import get_song_file_md5
         songfile_hash = get_song_file_md5(
             self.song.song_id, str(self.song.difficulty) + '.aff')
-        if songfile_hash and songfile_hash != self.song_hash:
-            app.logger.info('Invalid score: hash mismatch')
-            return False
+        # if songfile_hash and songfile_hash != self.song_hash:
+        #     # app.logger.info('Invalid score: hash mismatch')
+        #     return False
 
         x = f'''{self.song_token}{self.song_hash}{self.song.song_id}{self.song.difficulty}{self.score}{self.shiny_perfect_count}{
             self.perfect_count}{self.near_count}{self.miss_count}{self.health}{self.modifier}{self.clear_type}'''
         if self.combo_interval_bonus is not None:
             if self.combo_interval_bonus < 0 or self.combo_interval_bonus > self.all_note_count / 150:
-                app.logger.info('Combo internal bonus mismatch')
+                # app.logger.info('Combo internal bonus mismatch')
                 return False
             x = x + str(self.combo_interval_bonus)
 
         if self.hp_interval_bonus is not None and self.hp_interval_bonus < 0:
-            app.logger.info('HP internal bonus invalidated score')
+            # app.logger.info('HP internal bonus invalidated score')
             return False
 
         y = f'{self.user.user_id}{self.song_hash}'
         checksum = md5(x+md5(y))
 
-        if checksum != self.submission_hash:
-            app.logger.info('Invalid md5 hash mismatch')
-            return False
+        # if checksum != self.submission_hash:
+            # app.logger.info('Invalid md5 hash mismatch')
+            # return False
 
         return True
 
