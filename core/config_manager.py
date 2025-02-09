@@ -65,7 +65,6 @@ class Config:
 
     ALLOW_SCORE_WITH_NO_SONG = True
 
-    LOG_BASE_DIR = "./log"
     ALLOW_INFO_LOG = False
     ALLOW_WARNING_LOG = False
 
@@ -93,6 +92,7 @@ class Config:
 
     MAX_FRIEND_COUNT = 50
 
+    LOG_FOLDER_PATH = "./log"
     WORLD_MAP_FOLDER_PATH = './database/map/'
     WORLD_MAP_LEPHON_NELL_FOLDER_PATH = './database/map_lephon_nell'
     SONG_FILE_FOLDER_PATH = './database/songs/'

@@ -191,7 +191,7 @@ def main():
                 'stream': 'ext://flask.logging.wsgi_errors_stream',
                 'formatter': 'default'
             },
-            "error_file": generate_log_file_dict('ERROR', f'{Config.LOG_BASE_DIR}/error.log')
+            "error_file": generate_log_file_dict('ERROR', f'{Config.LOG_FOLDER_PATH}/error.log')
         },
         'formatters': {
             'default': {
@@ -202,11 +202,11 @@ def main():
     if Config.ALLOW_INFO_LOG:
         log_dict['root']['handlers'].append('info_file')
         log_dict['handlers']['info_file'] = generate_log_file_dict(
-            'INFO', f'{Config.LOG_BASE_DIR}/info.log')
+            'INFO', f'{Config.LOG_FOLDER_PATH}/info.log')
     if Config.ALLOW_WARNING_LOG:
         log_dict['root']['handlers'].append('warning_file')
         log_dict['handlers']['warning_file'] = generate_log_file_dict(
-            'WARNING', f'{Config.LOG_BASE_DIR}/warning.log')
+            'WARNING', f'{Config.LOG_FOLDER_PATH}/warning.log')
 
     dictConfig(log_dict)
 
