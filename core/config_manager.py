@@ -85,13 +85,16 @@ class Config:
     # You can change this to make another PTT mechanism.
     BEST30_WEIGHT = 1 / 40
     RECENT10_WEIGHT = 1 / 40
-    
+
+
     INVASION_START_WEIGHT = 0.1
     INVASION_HARD_WEIGHT = 0.1
 
     MAX_FRIEND_COUNT = 50
 
+    LOG_FOLDER_PATH = "./log"
     WORLD_MAP_FOLDER_PATH = './database/map/'
+    WORLD_MAP_LEPHON_NELL_FOLDER_PATH = './database/map_lephon_nell'
     SONG_FILE_FOLDER_PATH = './database/songs/'
     SONGLIST_FILE_PATH = './database/songs/songlist'
     CONTENT_BUNDLE_FOLDER_PATH = './database/bundle/'
@@ -108,14 +111,16 @@ class Config:
 
 
     NOTIFICATION_EXPIRE_TIME = 3 * 60 * 1000
-    
 
 
 class ConfigManager:
-
     @staticmethod
     def load(config) -> None:
-        for k, v in config.__dict__.items():
+        ConfigManager.load_dict(config.__dict__)
+
+    @staticmethod
+    def load_dict(config) -> None:
+        for k, v in config.items():
             if k.startswith('__') or k.endswith('__'):
                 continue
             if hasattr(Config, k):
