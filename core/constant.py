@@ -29,7 +29,7 @@ class Constant:
     ETO_UNCAP_BONUS_PROGRESS = 7
     LUNA_UNCAP_BONUS_PROGRESS = 7
     AYU_UNCAP_BONUS_PROGRESS = 5
-    SKILL_FATALIS_WORLD_LOCKED_TIME = 3600000
+    SKILL_FATALIS_WORLD_LOCKED_TIME = Config.SKILL_FATALIS_WORLD_LOCKED_TIME
     SKILL_MIKA_SONGS = ['aprilshowers', 'seventhsense', 'oshamascramble', 'breakbreak', 'straightintolights', 'virtus', 'yomibitoshirazu',
                         'amazingmightyyyy', 'cycles', 'maxrage', 'infinity', 'temptation']
     FATALIS_MAX_VALUE = 100
