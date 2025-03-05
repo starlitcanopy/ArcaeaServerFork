@@ -92,7 +92,7 @@ class CharacterValue:
             return self._calc_char_value_20_math(level.level, self.start, self.mid) + self.addition
         if level.mid_level < level.level <= level.max_level:
             return self._calc_char_value_30(level.level, self.mid, self.end) + self.addition
-        return 0
+        return self._calc_char_value_20_math(level.level, self.start, self.mid) + self.addition
 
 
 class Character(CollectionItemMixin):
@@ -465,7 +465,7 @@ class UserCharacter(Character):
         self.skill_flag = not self.skill_flag
         self.c.execute(f'''update {self.database_table_name} set skill_flag = ? where user_id = ? and character_id = ?''', (
             1 if self.skill_flag else 0, self.user.user_id, self.character_id))
-        
+
     def update_insight_state(self) -> None:
         if self.level.level == self.level.max_level:
             if self.user.insight_state == 3:
