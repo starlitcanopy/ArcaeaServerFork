@@ -92,7 +92,7 @@ class CharacterValue:
             return self._calc_char_value_20_math(level.level, self.start, self.mid) + self.addition
         if level.mid_level < level.level <= level.max_level:
             return self._calc_char_value_30(level.level, self.mid, self.end) + self.addition
-        return self._calc_char_value_30(level.level, self.mid, self.end) + self.addition
+        return self._calc_char_value_20_math(level.level, self.start, self.mid) + self.addition
 
 
 class Character(CollectionItemMixin):
