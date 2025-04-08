@@ -553,7 +553,7 @@ class UserInfo(User):
 
             'insight_state': self.insight_state,
             # 'custom_banner': 'online_banner_2024_06',
-            # 'subscription_multiplier': 114,
+            'subscription_multiplier': 114,
             # 'memory_boost_ticket': 5,
         }
 
