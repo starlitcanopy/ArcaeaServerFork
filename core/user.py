@@ -327,6 +327,8 @@ class UserInfo(User):
         self.stamina: 'UserStamina' = None
         self.insight_state: int = None
 
+        self.custom_banner = None
+
         self.__cores: list = None
         self.__packs: list = None
         self.__singles: list = None
@@ -553,6 +555,7 @@ class UserInfo(User):
 
             'insight_state': self.insight_state,
             # 'custom_banner': 'online_banner_2024_06',
+            'custom_banner': self.custom_banner,
             # 'subscription_multiplier': 114,
             # 'memory_boost_ticket': 5,
         }
@@ -600,6 +603,8 @@ class UserInfo(User):
         self.mp_notification_enabled = x[37] == 1
 
         self.insight_state = x[38]
+
+        self.custom_banner = x[39] if x[39] is not None else ''
 
         return self
 
