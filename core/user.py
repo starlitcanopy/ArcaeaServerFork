@@ -723,6 +723,10 @@ class UserInfo(User):
         self.c.execute(
             '''select count(*) from user where world_rank_score > ?''', (self.world_rank_score,))
         y = self.c.fetchone()
+
+        if self.ticket <= Config.STEALTH_MODE_MAX_MEMS:
+            return 0
+
         if y and y[0] + 1 <= Config.WORLD_RANK_MAX:
             return y[0] + 1
 

@@ -123,6 +123,9 @@ class Config:
     # Do not disable unless you know what you're doing
     SONG_HASH_CHECKS = True
 
+    # When below this threshold, the world rank will be hidden, as
+    # to prevent suspicion when posting screenshots online.
+    STEALTH_MODE_MAX_MEMS = 0
 
 class ConfigManager:
     @staticmethod
