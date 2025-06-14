@@ -12,7 +12,7 @@ class Config:
 
     SONG_FILE_HASH_PRE_CALCULATE = True
 
-    GAME_API_PREFIX = '/coldwind/35'  # 6.0.0 '/fallingleaves/34'  # str | list[str]
+    GAME_API_PREFIX = ['/coldwind/35', '/']  # 6.0.0 '/fallingleaves/34'  # str | list[str] / Do not remove the '/' prefix!
     OLD_GAME_API_PREFIX = []  # str | list[str]
 
     ALLOW_APPVERSION = []  # list[str]
