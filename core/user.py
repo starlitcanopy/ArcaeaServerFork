@@ -558,6 +558,14 @@ class UserInfo(User):
             'custom_banner': self.custom_banner,
             # 'subscription_multiplier': 114,
             # 'memory_boost_ticket': 5,
+            'insight_state': self.insight_state,  # 0~2 不可选，3 技能激活，4 未激活，5 激活可选，6 未激活可选
+
+            # 'enabled_features': [
+            #     {
+            #         "metadata": ["USA"],
+            #         "feature": "paymentlink"
+            #     }
+            # ],
         }
 
     def from_list(self, x: list) -> 'UserInfo':

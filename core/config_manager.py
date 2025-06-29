@@ -12,7 +12,7 @@ class Config:
 
     SONG_FILE_HASH_PRE_CALCULATE = True
 
-    GAME_API_PREFIX = ['/coldwind/35', '/']  # 6.0.0 '/fallingleaves/34'  # str | list[str] / Do not remove the '/' prefix!
+    GAME_API_PREFIX = ['/coldwind/35', '/']  # str | list[str]
     OLD_GAME_API_PREFIX = []  # str | list[str]
 
     ALLOW_APPVERSION = []  # list[str]
@@ -108,7 +108,6 @@ class Config:
     API_LOGIN_RATE_LIMIT = '10/5 minutes'
     GAME_REGISTER_IP_RATE_LIMIT = '10/1 day'
     GAME_REGISTER_DEVICE_RATE_LIMIT = '3/1 day'
-
 
     NOTIFICATION_EXPIRE_TIME = 3 * 60 * 1000
 
