@@ -37,7 +37,7 @@ world_mode_locked_end_ts int,
 beyond_boost_gauge real default 0,
 kanae_stored_prog real default 0,
 mp_notification_enabled int default 1,
-insight_state int default 0,
+insight_state default 4,  -- 这里写 4 是为了避免不能切换状态和无故被侵入
 custom_banner text
 );
 create table if not exists login(access_token text,
@@ -134,10 +134,6 @@ curr_position int,
 curr_capture real,
 is_locked int,
 primary key(user_id, map_id)
-);
-create table if not exists user_world_map(user_id int,
-lephon_nell_state int default 0,
-primary key(user_id)
 );
 create table if not exists songplay_token(token text primary key,
 user_id int,

@@ -1,7 +1,7 @@
 from .config_manager import Config
 
-ARCAEA_SERVER_VERSION = 'v2.12.0.9'
-ARCAEA_DATABASE_VERSION = 'v2.12.0.9'
+ARCAEA_SERVER_VERSION = 'v2.12.1'
+ARCAEA_DATABASE_VERSION = 'v2.12.1'
 ARCAEA_LOG_DATBASE_VERSION = 'v1.1'
 
 
@@ -10,6 +10,10 @@ class Constant:
     BAN_TIME = [1, 3, 7, 15, 31]
 
     MAX_STAMINA = 12
+
+    # INSIGHT_STATES = [x for x in range(7)]
+    INSIGHT_TOGGLE_STATES = [3, 4, 5, 6]
+    # DEFAULT_INSIGHT_STATE = Config.DEFAULT_INSIGHT_STATE
 
     STAMINA_RECOVER_TICK = 1800000
     FRAGSTAM_RECOVER_TICK = 23 * 3600 * 1000
@@ -30,7 +34,7 @@ class Constant:
     LUNA_UNCAP_BONUS_PROGRESS = 7
     AYU_UNCAP_BONUS_PROGRESS = 5
     SKILL_FATALIS_WORLD_LOCKED_TIME = 3600000
-    SKILL_MIKA_SONGS = ['aprilshowers', 'seventhsense', 'oshamascramble', 'breakbreak', 'straightintolights', 'virtus', 'yomibitoshirazu',
+    SKILL_MIKA_SONGS = ['aprilshowers', 'seventhsense', 'oshamascramble',
                         'amazingmightyyyy', 'cycles', 'maxrage', 'infinity', 'temptation']
     FATALIS_MAX_VALUE = 100
 
@@ -122,7 +126,7 @@ class Constant:
                                                      0x6CB300), (0XA35687B, 0xE456CDEA)
     ]
 
-    DATABASE_MIGRATE_TABLES = ['user', 'friend', 'best_score', 'recent30', 'user_world', 'item', 'user_item', 'purchase', 'purchase_item', 'user_save', 'user_world_map',
+    DATABASE_MIGRATE_TABLES = ['user', 'friend', 'best_score', 'recent30', 'user_world', 'item', 'user_item', 'purchase', 'purchase_item', 'user_save',
                                'login', 'present', 'user_present', 'present_item', 'redeem', 'user_redeem', 'redeem_item', 'api_login', 'chart', 'user_course', 'user_char', 'user_role']
 
     LOG_DATABASE_MIGRATE_TABLES = ['cache', 'user_score', 'user_rating']
